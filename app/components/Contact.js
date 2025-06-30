@@ -221,16 +221,6 @@ export default function ContactSection() {
                         {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                     </div>
 
-                    {/* Send Button */}
-                    {/* Button */}
-                    {/* <div onClick={handleSend} className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
-                        <Link
-                            href="#contact"
-                            className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)] drop-shadow-[0px_6px_0px_#d2ccb6] group-hover:drop-shadow-[0px_2px_0px_#d2ccb6] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"
-                        >
-                            Send <Send size={20} />
-                        </Link>
-                    </div> */}
 
                     {/* Send Button */}
                     <div className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
