@@ -2,8 +2,12 @@
 
 import Link from 'next/link'
 import { IdCardIcon } from 'lucide-react';
+import { useFaceHover } from '../context/FaceHoverContext';
 
 export default function Navbar() {
+
+    const { setTriggerHover } = useFaceHover();
+
     return (
         <nav className="w-full fixed top-0 left-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 border-b-2 border-black bg-[#fdf6e3]">
             {/* Logo */}
@@ -31,7 +35,7 @@ export default function Navbar() {
             </ul>
 
 
-            <div className="hero-title group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
+            <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="hero-title group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
                 <Link
                     href="#contact"
                     className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)] drop-shadow-[0px_6px_0px_#d2ccb6] group-hover:drop-shadow-[0px_2px_0px_#80785f] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"

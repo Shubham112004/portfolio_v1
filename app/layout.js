@@ -4,6 +4,7 @@ import CustomCursor from "./components/CustomCursor";
 import LoadingScreen from "./components/LoadingScreen";
 import { Toaster } from 'react-hot-toast';
 import Script from "next/script";
+import { FaceHoverProvider } from "./context/FaceHoverContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,11 +108,18 @@ export default function RootLayout({ children }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
+
+
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Toaster position="top-center" reverseOrder={false} />
-        <CustomCursor />
-        <LoadingScreen>{children}</LoadingScreen>
+
+        <FaceHoverProvider>
+          <Toaster position="top-center" reverseOrder={false} />
+          <CustomCursor />
+          <LoadingScreen>{children}</LoadingScreen>
+        </FaceHoverProvider>
       </body>
+
+
     </html>
   );
 }

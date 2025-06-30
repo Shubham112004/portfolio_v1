@@ -9,6 +9,7 @@ import Underline from '@tiptap/extension-underline';
 import Link from 'next/link';
 import { Github, Linkedin, DownloadIcon, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useFaceHover } from '../context/FaceHoverContext';
 
 export default function ContactSection() {
     const [to, setTo] = useState('shubhamgaikwad2k4@gmail.com'); // your email
@@ -89,6 +90,9 @@ export default function ContactSection() {
         }
     };
 
+    const { setTriggerHover } = useFaceHover();
+
+
 
     return (
         <section id='contact' className="w-full min-h-screen bg-[#f3ead2] text-[#1a1a1a] px-6 py-16 md:px-20 flex flex-col justify-center items-center">
@@ -134,7 +138,7 @@ export default function ContactSection() {
                             <Linkedin className="w-5 h-5" />
                         </a>
                         {/* Button */}
-                        <div className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
+                        <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
                             <Link
                                 href="/shubham-gaikwad.pdf" target='_blank'
                                 className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)] drop-shadow-[0px_6px_0px_#80785f] group-hover:drop-shadow-[0px_2px_0px_#80785f] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"
@@ -223,7 +227,7 @@ export default function ContactSection() {
 
 
                     {/* Send Button */}
-                    <div className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
+                    <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
                         <button
                             onClick={handleSend}
                             disabled={loading}
@@ -235,6 +239,7 @@ export default function ContactSection() {
                     </div>
                 </div>
             </div>
+
         </section>
     );
 }

@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PinIcon } from 'lucide-react';
+import { useFaceHover } from '../context/FaceHoverContext';
 
 export default function About() {
     const imgWrapperRef = useRef(null)
@@ -17,6 +18,8 @@ export default function About() {
             y: e.clientY - bounds.top,
         })
     }
+
+    const { setTriggerHover } = useFaceHover();
 
 
     return (
@@ -43,7 +46,7 @@ export default function About() {
                     </p>
 
                     {/* Button */}
-                    <div className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
+                    <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="inline-block text-[16px] group transition-transform duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]">
                         <Link
                             href="#contact"
                             className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)] drop-shadow-[0px_6px_0px_#1a1a1a] group-hover:drop-shadow-[0px_2px_0px_#1a1a1a] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"

@@ -1,8 +1,21 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-export default function EventBadge({ onTypingComplete }) {
+export default function EventBadge({
+    showChatBubble = true,
+    faceSize = 64,
+    eyeSize = 4,
+    smileWidth = 16,
+    faceColor = '#f3a20f',
+    bubbleColor = '#f97316',
+    bubbleText = 'Just doing my thing',
+    onTypingComplete,
+    fixed = false,
+    position = { bottom: '1.5rem', right: '1.5rem' },
+    triggerHover = false,
+}) {
     const leftEyeRef = useRef(null);
     const rightEyeRef = useRef(null);
     const smileRef = useRef(null);
@@ -10,6 +23,11 @@ export default function EventBadge({ onTypingComplete }) {
 
     const [visibleText, setVisibleText] = useState('');
     const [showDots, setShowDots] = useState(true);
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const effectiveHover = triggerHover || isHovered;
+
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -44,53 +62,6 @@ export default function EventBadge({ onTypingComplete }) {
     }, []);
 
     useEffect(() => {
-        const textArray = [
-            'Just doing my thing'
-        ];
-
-        const delay = 100;
-        const pauseBetweenTexts = 1000;
-
-        let currentTextIndex = 0;
-        let charIndex = 0;
-        let typingInterval;
-        let pauseTimeout;
-
-        const typeNextChar = () => {
-            const currentText = textArray[currentTextIndex];
-
-            if (charIndex < currentText.length) {
-                setVisibleText(currentText.substring(0, charIndex + 1)); // Always slice up to current char
-                charIndex++;
-            } else {
-                clearInterval(typingInterval);
-
-                // Wait before starting next string
-                if (currentTextIndex < textArray.length - 1) {
-                    pauseTimeout = setTimeout(() => {
-                        currentTextIndex++;
-                        charIndex = 0;
-                        setVisibleText('');
-                        typingInterval = setInterval(typeNextChar, delay);
-                    }, pauseBetweenTexts);
-                }
-            }
-        };
-
-        const dotsTimer = setTimeout(() => {
-            setShowDots(false);
-            typingInterval = setInterval(typeNextChar, delay);
-        }, 700);
-
-        return () => {
-            clearTimeout(dotsTimer);
-            clearTimeout(pauseTimeout);
-            clearInterval(typingInterval);
-        };
-    }, []);
-
-    useEffect(() => {
-        const textArray = ['Just doing my thing'];
         const delay = 100;
         const pauseAfterTyping = 600;
 
@@ -98,10 +69,8 @@ export default function EventBadge({ onTypingComplete }) {
         let typingInterval;
 
         const typeNextChar = () => {
-            const currentText = textArray[0];
-
-            if (charIndex < currentText.length) {
-                setVisibleText(currentText.substring(0, charIndex + 1));
+            if (charIndex < bubbleText.length) {
+                setVisibleText(bubbleText.substring(0, charIndex + 1));
                 charIndex++;
             } else {
                 clearInterval(typingInterval);
@@ -120,56 +89,127 @@ export default function EventBadge({ onTypingComplete }) {
             clearTimeout(dotsTimer);
             clearInterval(typingInterval);
         };
-    }, [onTypingComplete]);
+    }, [bubbleText, onTypingComplete]);
 
-    return (
-        <div className="flex items-center gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
-            {/* Sun Face */}
+    const badgeContent = (
+        <div
+            className={`flex items-center gap-2 sm:gap-4 flex-wrap sm:flex-nowrap ${fixed ? 'fixed z-50' : ''
+                }`}
+            style={fixed ? position : {}}
+        >
+            {/* Face */}
             <div
                 ref={faceRef}
-                className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-[1px] border-black shadow-[0_0_0_3px_white]"
-                style={{ backgroundColor: '#f3a20f' }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                className="relative flex items-center justify-center rounded-full border border-black shadow-[0_0_0_3px_white] transition-all duration-300"
+                style={{
+                    width: faceSize,
+                    height: faceSize,
+                    backgroundColor: faceColor,
+                }}
             >
-                {/* Left Eye */}
+                {/* Left Eye (always a dot) */}
                 <div
                     ref={leftEyeRef}
-                    className="absolute w-[0.25rem] h-[0.25rem] bg-black rounded-full left-[30%] top-[35%] transition-transform duration-75"
+                    className="absolute bg-black rounded-full transition-transform duration-75"
+                    style={{
+                        width: eyeSize,
+                        height: eyeSize,
+                        left: '30%',
+                        top: '35%',
+                    }}
                 />
-                {/* Right Eye */}
+
+                {/* Right Eye (dot or X) */}
+                {/* {!effectiveHover ? ( */}
                 <div
                     ref={rightEyeRef}
-                    className="absolute w-[0.25rem] h-[0.25rem] bg-black rounded-full right-[30%] top-[35%] transition-transform duration-75"
+                    className="absolute bg-black rounded-full transition-transform duration-75"
+                    style={{
+                        width: eyeSize,
+                        height: eyeSize,
+                        right: '30%',
+                        top: '35%',
+                    }}
                 />
-                {/* Smile */}
-                <svg
-                    ref={smileRef}
-                    className="absolute bottom-[25%] left-1/2 -translate-x-1/2 transition-transform duration-75 w-[16px] sm:w-[20px]"
-                    height="10"
-                    viewBox="0 0 20 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M2 2C4 6 16 6 18 2"
-                        stroke="black"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                    />
-                </svg>
-            </div>
+                {/* ) : (
+                    <div className="absolute right-[28%] top-[35%] w-[8px] h-[1.5px] bg-black rotate-[-2deg] origin-center"></div>
 
-            {/* Chat Bubble with Typewriter Text */}
-            <div className="relative bg-orange-500 text-white text-xs sm:text-sm md:text-base font-semibold rounded-2xl px-3 sm:px-4 py-1.5 sm:py-2 border-[1px] border-black shadow-md max-w-[80vw] sm:max-w-none">
-                {showDots ? (
-                    <span className="animate-blink">...</span>
+                )} */}
+
+                {/* Smile (simple or wide-toothy) */}
+                {!effectiveHover ? (
+                    <svg
+                        ref={smileRef}
+                        className="absolute bottom-[25%] left-1/2 -translate-x-1/2 transition-transform duration-75"
+                        style={{ width: smileWidth }}
+                        height="10"
+                        viewBox="0 0 20 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M2 2C4 6 16 6 18 2"
+                            stroke="black"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                        />
+                    </svg>
                 ) : (
-                    <span>{visibleText}</span>
-                )}
+                    <svg
+                        className="absolute bottom-[8%] left-1/2 -translate-x-1/2 animate-smile-bounce"
+                        width={faceSize * 0.4}
+                        height="34"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        {/* Outer curved mouth shape */}
+                        <path
+                            d="M12 20 C10 55, 54 55, 52 20 C48 30, 16 30, 12 20 Z"
+                            fill="#fff7dd"
+                            stroke="black"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                        />
 
-                {/* Bubble Tail */}
-                <div className="absolute left-[-7px] bottom-2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[3px] border-b-transparent border-r-[10px] border-r-gray-800"></div>
-                <div className="absolute left-[-6px] bottom-2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[3.5px] border-b-transparent border-r-[10px] border-r-orange-500"></div>
+                        {/* Upper teeth divider */}
+                        <path
+                            d="M14 28 C18 40, 46 40, 50 28"
+                            stroke="black"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                        />
+
+                    </svg>
+
+                )}
             </div>
+
+
+            {/* Chat Bubble */}
+            {showChatBubble && (
+                <div
+                    className="relative text-white text-xs sm:text-sm md:text-base font-semibold rounded-2xl px-3 sm:px-4 py-1.5 sm:py-2 border border-black shadow-md max-w-[80vw] sm:max-w-none"
+                    style={{ backgroundColor: bubbleColor }}
+                >
+                    {showDots ? (
+                        <span className="animate-blink">...</span>
+                    ) : (
+                        <span>{visibleText}</span>
+                    )}
+
+                    {/* Bubble Tail */}
+                    <div className="absolute left-[-7px] bottom-2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[3px] border-b-transparent border-r-[10px] border-r-[#f97316]"></div>
+                    <div
+                        className="absolute left-[-6px] bottom-2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[3.5px] border-b-transparent"
+                        style={{ borderRightColor: bubbleColor }}
+                    ></div>
+                </div>
+            )}
         </div>
     );
+
+    return fixed ? createPortal(badgeContent, document.body) : badgeContent;
 }

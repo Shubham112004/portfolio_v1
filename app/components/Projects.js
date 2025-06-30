@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 import { LinkIcon } from 'lucide-react';
+import { useFaceHover } from '../context/FaceHoverContext';
 
 const BentoTilt = ({ children, className = '' }) => {
     const itemRef = useRef();
@@ -41,6 +42,10 @@ const BentoTilt = ({ children, className = '' }) => {
 };
 
 const BentoCard = ({ src, width, height, title, description, stack, link }) => {
+
+    const { setTriggerHover } = useFaceHover();
+
+
     return (
         <div className='relative size-full'>
             <div className='relative z-10 flex flex-col justify-between h-full p-5 gap-5 text-blue-50'>
@@ -54,7 +59,7 @@ const BentoCard = ({ src, width, height, title, description, stack, link }) => {
                                 <p className='mt-3'>{stack}</p>
                             </>
                         )}
-                        <div className="hero-title mt-4 inline-block group transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                        <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="hero-title mt-4 inline-block group transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
                             <Link
                                 href={link} target='_blank'
                                 className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] drop-shadow-[0px_6px_0px_#292929] group-hover:drop-shadow-[0px_2px_0px_#292929] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"
@@ -70,6 +75,10 @@ const BentoCard = ({ src, width, height, title, description, stack, link }) => {
 };
 
 const Projects = () => {
+
+    const { setTriggerHover } = useFaceHover();
+
+
     return (
         <section id='projects' className='bg-black py-10  overflow-x-hidden'>
             <div className='container mx-auto px-4 md:px-10'>
@@ -93,7 +102,7 @@ const Projects = () => {
                                     Designed for premium cocktail enthusiasts and modern F&B brands, MojitoCafe blends motion design and user interaction to create a standout visual narrative that elevates a traditional website into an experience.
                                 </p>
                                 <p className='mt-3'>### React.js | Tailwind CSS | GSAP</p>
-                                <div className="hero-title mt-4 inline-block group transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                                <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="hero-title mt-4 inline-block group transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
                                     <Link
                                         href="https://mojitocafe.vercel.app" target='_blank'
                                         className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] drop-shadow-[0px_6px_0px_#292929] group-hover:drop-shadow-[0px_2px_0px_#292929] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"
@@ -134,19 +143,21 @@ const Projects = () => {
 
                     {/* Subscription Tracker */}
                     <BentoTilt className='relative border border-white/20 col-span-2 md:col-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out'>
-                        <div className='flex flex-col justify-between p-5 text-white'>
-                            <h1 className='md:text-6xl text-3xl font-black special-font'>Subscription Tracker API</h1>
-                            <p className='text-sm md:text-base font-quicksand mt-3'>
-                                Built a secure and scalable subscription tracking backend using Node.js, JWT, and MongoDB. Implemented robust authentication with Arcjet and bcrypt.js, automated workflows with Upstash, and integrated Nodemailer to notify users of upcoming renewals — all designed to reduce manual tracking and improve user experience.
-                            </p>
-                            <p className='mt-3'>### Javascript | Node.js | Express.js | MongoDB</p>
-                            <div className="hero-title mt-4 inline-block group transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
-                                <Link
-                                    href="https://subscription-tracker-6dlo.onrender.com/" target='_blank'
-                                    className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] drop-shadow-[0px_6px_0px_#292929] group-hover:drop-shadow-[0px_2px_0px_#292929] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"
-                                >
-                                    Go Live <LinkIcon size={20} />
-                                </Link>
+                        <div className='h-full w-ful'>
+                            <div className='p-5 text-blue-50'>
+                                <h1 className='md:text-6xl text-3xl font-black special-font'>Subscription Tracker API</h1>
+                                <p className='text-sm md:text-base font-quicksand mt-3'>
+                                    Built a secure and scalable subscription tracking backend using Node.js, JWT, and MongoDB. Implemented robust authentication with Arcjet and bcrypt.js, automated workflows with Upstash, and integrated Nodemailer to notify users of upcoming renewals — all designed to reduce manual tracking and improve user experience.
+                                </p>
+                                <p className='mt-3'>### Javascript | Node.js | Express.js | MongoDB</p>
+                                <div onMouseEnter={() => setTriggerHover(true)} onMouseLeave={() => setTriggerHover(false)} className="hero-title mt-4 inline-block group transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                                    <Link
+                                        href="https://subscription-tracker-6dlo.onrender.com/" target='_blank'
+                                        className="inline-flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] drop-shadow-[0px_6px_0px_#292929] group-hover:drop-shadow-[0px_2px_0px_#292929] group-hover:translate-y-[4px] bg-pink-400 text-black font-quicksand font-semibold px-4 py-2 rounded-full border border-black"
+                                    >
+                                        Go Live <LinkIcon size={20} />
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </BentoTilt>

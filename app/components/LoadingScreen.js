@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import EventBadge from './EventBadge';
+import FlotingBadge from './FlotingBadge';
 
 export default function LoadingScreen({ children }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +32,7 @@ export default function LoadingScreen({ children }) {
                     <EventBadge onTypingComplete={handleTypingComplete} />
                 </div>
             )}
-
+            {isLoading == false && <FlotingBadge />}
             <div
                 className={`
                     transition-all duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] transform

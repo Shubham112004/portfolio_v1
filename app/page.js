@@ -1,14 +1,24 @@
 
+'use client'
+
+import { useState } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import EventBadge from "./components/EventBadge";
 import Experience from "./components/Experience";
+import FlotingBadge from "./components/FlotingBadge";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Stacks from "./components/Stacks";
+import { useFaceHover } from "./context/FaceHoverContext";
 
 
 export default function Home() {
+
+  const { triggerHover } = useFaceHover();
+  const [isHovered, setIsHovered] = useState(false);
+  const effectiveHover = triggerHover || isHovered;
+
   return (
     <div>
 
@@ -16,12 +26,13 @@ export default function Home() {
         {/* NAV */}
         <Navbar />
 
+
         {/* MAIN CONTENT */}
         <div className="relative z-10 flex flex-col items-center justify-center pt-24 md:pt-32 px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-7xl">
             {/* Event Badge */}
-            <div className="flex items-center justify-center mb-10">
-              <EventBadge />
+            <div className="flex items-center justify-center mb-10" id="main-event-badge">
+              <EventBadge triggerHover={effectiveHover} />
             </div>
             {/* Hero Title Row */}
             <div className="flex flex-wrap gap-y-2 gap-x-2 items-center justify-center h-auto min-h-[7rem] md:min-h-[6rem]">
@@ -200,6 +211,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <About />
       <Experience />
       <div className="hidden md:block">
