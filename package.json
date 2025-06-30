@@ -9,15 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.4"
+    "@tiptap/extension-placeholder": "^2.23.0",
+    "@tiptap/extension-underline": "^2.23.0",
+    "@tiptap/react": "^2.23.0",
+    "@tiptap/starter-kit": "^2.23.0",
+    "lucide-react": "^0.525.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.1",
+    "next": "15.3.4",
+    "nodemailer": "^7.0.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.10"
   }
 }

@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #e5ddbf;
+  --foreground: #1a1a1a;
 }
+
+@font-face {
+  font-family: 'SugarPeachy';
+  src: url('/fonts/SugarPeachy/Sugar Peachy Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-sugar {
+  font-family: 'SugarPeachy', sans-serif;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  /* ✔ No space in the font name is cleaner */
+  src: url('/fonts/SugarPeachy/Quicksand-VariableFont_wght.ttf') format('truetype');
+  /* use 'truetype' if .ttf */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-quicksand {
+  font-family: 'Quicksand';
+}
+
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono); */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f3ecd2;
+    --foreground: #1a1a1a;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+html,
+body,
+a,
+button,
+* {
+  cursor: none !important;
+}
+
+.animate-blink {
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 0
+  }
+
+  50% {
+    opacity: 1
+  }
+}
+
+@keyframes squash {
+
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.05, 0.95);
+    /* stretches horizontally, squashes vertically */
+  }
+}
+
+.container1 {
+  position: relative;
+  width: 100%;
+  height: 50svh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.grid1 {
+  position: relative;
+  width: 93%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f3a30f86;
+  background-color: rgba(50, 50, 50, 0.2);
+  /* soft dark tint */
+  backdrop-filter: blur(6px);
+  /* only if you want glassmorphism */
+  z-index: 2;
+  transform: scale(0.95);
+  /* 👈 slightly smaller to let glow show behind */
+  overflow: visible;
+}
+
+.grid-row,
+.grid-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+
+.grid-row:nth-child(1) {
+  border-bottom: 1px solid #f3ecd2;
+}
+
+.grid-item:not(:last-child) {
+  border-right: 1px solid #f3ecd2;
+}
+
+.grid-item p {
+  color: #fff;
+  font-size: 21px;
+  font-weight: 500;
+  z-index: 3;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover p {
+  transform: scale(1.1);
+}
+
+/* ✨ Here's your glow div, under the grid tile */
+.highlight {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 120px;
+  height: 120px;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 1;
+  /* Behind the grid */
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+/* globals.css or inside a <style jsx global> block */
+.ProseMirror {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 180px;
+  padding: 0.5rem;
+  position: relative;
+  color: #111;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+.ProseMirror.is-editor-empty::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  /* gray-400 */
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  pointer-events: none;
 }
