@@ -4,7 +4,7 @@ import React from 'react'
 
 const Experience = () => {
     return (
-        <div id='experience' className="relative w-full px-4 py-8 md:py-16 flex justify-center items-center">
+        <div id='experience' className="relative w-full py-8 md:py-16 flex justify-center items-center">
             <div className="w-[85rem] bg-[#f1b23d] rounded-[30px] border-2 font-quicksand p-6 md:p-10 relative">
 
                 {/* Opening Syntax */}

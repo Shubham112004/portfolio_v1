@@ -95,7 +95,7 @@ export default function ContactSection() {
 
 
     return (
-        <section id='contact' className="w-full min-h-screen bg-[#f3ead2] text-[#1a1a1a] px-6 py-16 md:px-20 flex flex-col justify-center items-center">
+        <section id='contact' className="w-full min-h-screen bg-[#f3ead2] text-[#1a1a1a] py-16 md:px-20 flex flex-col justify-center items-center">
             <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Left Column */}
                 <div className="space-y-8 flex flex-col justify-center h-full">

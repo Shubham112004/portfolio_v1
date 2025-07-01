@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div>
 
-      <div className="h-[90vh] md:h-screen relative overflow-x-hidden">
+      <div className="h-[103vh] md:h-screen relative overflow-x-hidden">
         {/* NAV */}
         <Navbar />
 

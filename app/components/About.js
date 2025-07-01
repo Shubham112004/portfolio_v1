@@ -23,7 +23,7 @@ export default function About() {
 
 
     return (
-        <div id='about' className="relative w-full min-h-[520px] md:h-[520px] flex flex-col md:flex-row items-center justify-center bg-black text-white overflow-hidden px-4">
+        <div id='about' className='flex justify-center items-center' >
             {/* Section title */}
             <div className='absolute top-[24px] left-[16px] md:top-[6px] md:left-[68px] w-40 h-8 bg-blue-600 text-white text-center pt-1'>
                 ### Behind the Code
@@ -31,7 +31,7 @@ export default function About() {
 
             <div className="border border-blue-700 md:w-11/12 h-auto relative flex flex-col-reverse mt-14 mb-4 md:mt-8 md:flex-row items-center md:items-start gap-6 p-4">
                 {/* Text content */}
-                <div className="w-full md:w-3/4 m-3 md:pr-2 text-[16px] md:text-[19px] font-quicksand text-white leading-relaxed space-y-4 mb-0 text-justify">
+                <div className="w-full md:w-3/4 m-3 md:pr-2 text-[16px] md:text-[19px] font-quicksand text-black leading-relaxed space-y-4 mb-0 text-justify">
 
                     <p>
                         Hey, I’m Shubham Gaikwad — a developer who loves turning ideas into real, working products. I work with JavaScript, mostly using React.js for the frontend and Node.js + MongoDB for the backend. I also have full-stack development experience from my time at BEONEXPERT Technologies, where I worked on real-world features and learned how to build practical, production-ready systems.
