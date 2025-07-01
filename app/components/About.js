@@ -25,7 +25,7 @@ export default function About() {
     return (
         <div id='about' className="relative w-full min-h-[520px] md:h-[520px] flex flex-col md:flex-row items-center justify-center bg-black text-white overflow-hidden px-4">
             {/* Section title */}
-            <div className='absolute top-[24px] left-[16px] md:top-[14px] md:left-[78px] w-40 h-8 bg-blue-600 text-white text-center pt-1'>
+            <div className='absolute top-[24px] left-[16px] md:top-[6px] md:left-[68px] w-40 h-8 bg-blue-600 text-white text-center pt-1'>
                 ### Behind the Code
             </div>
 

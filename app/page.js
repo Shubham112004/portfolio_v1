@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Stacks from "./components/Stacks";
 import { useFaceHover } from "./context/FaceHoverContext";
+import Works from "./components/Works";
 
 
 export default function Home() {
@@ -217,7 +218,8 @@ export default function Home() {
       <div className="hidden md:block">
         <Stacks />
       </div>
-      <Projects />
+      {/* <Projects /> */}
+      <Works />
       <Contact />
     </div>
   );

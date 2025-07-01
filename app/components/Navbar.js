@@ -30,7 +30,7 @@ export default function Navbar() {
             <ul className="hidden md:flex gap-6 font-medium text-black font-quicksand">
                 <li><Link href="#about" className="hover:underline underline-offset-4">About</Link></li>
                 <li><Link href="#experience" className="hover:underline underline-offset-4">Experience</Link></li>
-                <li><Link href="#projects" className="hover:underline underline-offset-4">Projects</Link></li>
+                <li><Link href="#work" className="hover:underline underline-offset-4">Projects</Link></li>
                 <li><Link href="#contact" className="hover:underline underline-offset-4">Contact</Link></li>
             </ul>
 

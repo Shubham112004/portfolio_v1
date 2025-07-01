@@ -115,7 +115,11 @@ export default function RootLayout({ children }) {
         <FaceHoverProvider>
           <Toaster position="top-center" reverseOrder={false} />
           <CustomCursor />
-          <LoadingScreen>{children}</LoadingScreen>
+          <LoadingScreen>
+            <div className="w-full max-w-[1440px] mx-auto px-4 xl:px-12 2xl:px-20">
+              {children}
+            </div>
+          </LoadingScreen>
         </FaceHoverProvider>
       </body>
 

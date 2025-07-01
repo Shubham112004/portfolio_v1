@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@tiptap/extension-placeholder": "^2.23.0",
     "@tiptap/extension-underline": "^2.23.0",
     "@tiptap/react": "^2.23.0",
