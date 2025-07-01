@@ -14,9 +14,6 @@ export async function POST(req) {
         await connectDB();
         const newMsg = await Message.create({ from, subject, message });
 
-        // ✅ Respond early to frontend
-        const response = NextResponse.json({ success: true }, { status: 200 });
-
         // Now send emails in background
         (async () => {
             const transporter = nodemailer.createTransport({
@@ -54,6 +51,12 @@ export async function POST(req) {
                 transporter.sendMail(autoReplyOptions)
             ]);
         })();
+
+
+        // ✅ Respond early to frontend
+        const response = NextResponse.json({ success: true }, { status: 200 });
+
+
 
         return response;
 
