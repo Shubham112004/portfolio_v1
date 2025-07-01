@@ -56,7 +56,7 @@ const FlotingBadge = () => {
     return (
         <div
             ref={floatingRef}
-            className="fixed top-[600px] left-14 z-[999] opacity-0 -translate-x-10"
+            className="fixed top-[600px] md:left-14 left-3 z-[999] opacity-0 -translate-x-10"
         >
             <EventBadge showChatBubble={false} triggerHover={effectiveHover} />
         </div>
