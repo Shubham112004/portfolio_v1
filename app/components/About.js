@@ -23,7 +23,7 @@ export default function About() {
 
 
     return (
-        <div id='about' className='flex justify-center items-center' >
+        <div id='about' className='flex justify-center items-center md:mt-0 mt-[-55px]' >
             {/* Section title */}
             <div className='absolute top-[24px] left-[16px] md:top-[6px] md:left-[68px] w-40 h-8 bg-blue-600 text-white text-center pt-1'>
                 ### Behind the Code
