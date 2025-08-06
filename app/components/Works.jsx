@@ -105,7 +105,6 @@ const Works = () => {
         moveY.current(y);
     };
 
-
     return (
         <section id="work" className="flex flex-col min-h-screen overflow-x-hidden font-quicksand md:mb-[-150px]">
 
@@ -182,6 +181,23 @@ const Works = () => {
                 </div>
 
             </div>
+            <div className="flex mt-2 md:h-[500px]">
+                <div
+                    className="relative w-[700px] h-[380px] rounded-xl overflow-hidden shadow-2xl border-4 border-white"
+                >
+                    <img
+                        src="/aws.png"
+                        alt="AWS Project"
+                        className="w-full h-full object-contain"
+                    />
+
+                    {/* Optional overlay for caption */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-center text-sm md:text-base px-4 py-1">
+                        🛠️ 3-Tier AWS Architecture — S3 + EC2 (ASG) + RDS in VPC
+                    </div>
+                </div>
+            </div>
+
         </section>
     );
 };
